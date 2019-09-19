@@ -1,0 +1,245 @@
+
+
+$black: black;
+$white: #eaeaea;
+
+$text-arrow-space: 16px;
+$shaft-width: 1px;
+$newshaft-width: 64px;
+$shaft-thickness: 1px;
+$arrow-head-width: 8px;
+$arrow-head-thickness: $shaft-thickness;
+
+
+
+// Base
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+
+.container2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+
+// The Arrow
+
+.the-arrow {
+  width: $shaft-width;
+  transition: all 0.2s;
+
+  &.-left {
+    position: absolute;
+    top: 60%;
+    left: 0;
+
+    > .shaft {
+      width: 0;
+      background-color: $black;
+
+      &:before,
+      &:after {
+        width: 0;
+        background-color: $black;
+      }
+
+      &:before {
+        transform: rotate(0);
+      }
+
+      &:after {
+        transform: rotate(0);
+      }
+    }
+  }
+
+  &.-right {
+    top: 3px;
+
+    > .shaft {
+      width: $shaft-width;
+      transition-delay: 0.2s;
+
+      &:before,
+      &:after {
+        width: $arrow-head-width;
+        transition-delay: 0.3s;
+        transition: all 0.5s;
+      }
+
+      &:before {
+        transform: rotate(40deg);
+      }
+
+      &:after {
+        transform: rotate(-40deg);
+      }
+    }
+  }
+
+  > .shaft {
+    background-color: $black;
+    display: block;
+    height: $shaft-thickness;
+    position: relative;
+    transition: all 0.2s;
+    transition-delay: 0;
+    will-change: transform;
+
+    &:before,
+    &:after {
+      background-color: $black;
+      content: '';
+      display: block;
+      height: $arrow-head-thickness;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transition: all 0.2s;
+      transition-delay: 0;
+    }
+
+    &:before {
+      transform-origin: top right;
+    }
+
+    &:after {
+      transform-origin: bottom right;
+    }
+  }
+}
+
+
+
+// Animated Arrow Button
+
+.animated-arrow {
+  display: inline-block;
+  color: white;
+  font-size: 1.25em;
+  font-style: italic;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $black;
+
+    > .the-arrow.-left {
+      > .shaft {
+        width: $newshaft-width;
+        transition-delay: 0.1s;
+        background-color: $black;
+
+        &:before,
+        &:after {
+          width: $arrow-head-width;
+          transition-delay: 0.1s;
+          background-color: $black;
+        }
+
+        &:before {
+          transform: rotate(40deg);
+        }
+
+        &:after {
+          transform: rotate(-40deg);
+        }
+      }
+    }
+
+    > .main {
+      transform: translateX($shaft-width + $text-arrow-space);
+      transform: translateX($newshaft-width + $text-arrow-space);
+
+      > .the-arrow.-right {
+        > .shaft {
+          width: 0;
+          transform: translateX(200%);
+          transition-delay: 0;
+
+          &:before,
+          &:after {
+            width: 0;
+            transition-delay: 0;
+            transition: all 0.1s;
+          }
+
+          &:before {
+            transform: rotate(0);
+          }
+
+          &:after {
+            transform: rotate(0);
+          }
+        }
+      }
+    }
+  }
+
+  > .main {
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+
+    > .textLesMer {
+      margin: 0 $text-arrow-space 0 0;
+      line-height: 1;
+    }
+
+    > .the-arrow {
+      position: relative;
+    }
+  }
+}
+
+$base: #C3073F;
+$accent: #fff;
+$size: 15px;
+// ARROWS
+#arrows {
+  width: 100%;
+  flex-flow: row wrap;
+  display: flex;
+  li {
+    position: relative;
+    width: calc(25% - 100px); height: $size * 2;
+    margin-top: 36px;
+    margin-bottom: 30px;
+    background: $base;
+    font-size: 7pt;
+    font-weight: 800;
+    line-height: $size * 2;
+    text-align: center;
+    text-transform: uppercase;
+    list-style-type: none;
+    // ARROW DEFAULTS
+    &:before {
+      content: '';
+      position: absolute;
+      border-width: $size;
+      border-style: solid;
+      border-color: transparent;
+    }
+    // BOTTOM-LEFT
+&.bottom-left:before {
+  left: 0; bottom: 0;
+  border-top-color: $base;
+  border-left-color: $base;
+  transform: translateY(100%);
+  -moz-transform : translateY(0%);
+}
+}
+  li:hover {
+    -webkit-transform: rotate(-10deg);
+     -o-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+    -moz-transform: rotate(0deg);
+  }
+}
